@@ -9,6 +9,19 @@ beacons fails to accommodate scenarios where the user is not very close
 to the system. We intend to solve this problem by using 3 BLE beacon
 scanners. With the proposed system it is desired to achieve positioning
 even at areas where it is impossible to plant a BLE beacon or a scanner.
+This repo aims to improve that by using multiple BLE beacon scanners to triangulate / localize a user within a room. 
+A use‐case: you have lights in different parts of a room; based on which part you are in, different lights or actions are triggered.
+
+| Component                           | Role / Function                                                 | How It Works                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       | 
+| ----------------------------------- | --------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | 
+| **BLE Beacon Scanners** (3 of them) | Capture RSSI (signal strength) from BLE beacons carried by user | Each scanner (ESP32) operates in dual mode: Bluetooth for scanning and WiFi for connectivity. It detects BLE advertisements from user devices (iBeacons), captures RSSI + UUID + scanner ID, then sends to MQTT broker. ([GitHub][1])                                                                                                                                                                                                                                                              |                          
+| **User Beacon Device**              | Signifies user’s presence & identity                            | A smart device (with a generic app from Play Store) emitting BLE beacon signals. UUID used to recognize “known” user. ([GitHub][1])                                                                                                                                                                                                                                                                                                                                                                |                   
+| **MQTT Broker + Raspberry Pi**      | Collects data from scanners; acts as central data hub           | Scanners publish on topics like `fromDEV{scannerID}` with the RSSI and UUID. Raspberry Pi hosts MQTT broker + Node-RED flows. ([GitHub][1])                                                                                                                                                                                                                                                                                                                                                        |                          
+| **Node-RED Flow / Dashboard**       | Process data, decide location + trigger actions, display info   | - Reads messages from scanners via MQTT. <br> - Uses calibration data (RSSI at known positions) stored on Pi to compare current signals and deduce in which of the pre-defined positions the user is. <br> - Applies filtering (median filter) to smooth out noise. <br> - Has a dashboard: calibration tab, user positions, settings (e.g. time), also displays relevant sensor / system info. <br> - Drives actions: turning lights on/off through MQTT messages to relay modules. ([GitHub][1]) |                          
+| **Actuators (Lights via Relays)**   | Physically turn lights on/off based on location & time          | NodeMCU (ESP8266) modules subscribe to MQTT topics; toggling of GPIO pins controls relays and hence lights. There’s also a web interface to override behavior. ([GitHub][1])                                                                                                                                                                                                                                                                                                                       |                          
+
+[1]: https://github.com/ransaraw98/Indoor-Positioning-BLE "GitHub - ransaraw98/Indoor-Positioning-BLE"
+
 
 ## System overview
 
@@ -223,6 +236,20 @@ unable to detect the device is out of the room. We suspect this is
 mainly due to the implemented indoor area was being very spatial.
 
 <img align="center" width="45%" height="100%" src="https://github.com/ransaraw98/Indoor-Positioning-BLE/blob/master/Documentation/IMG_20210706_043349.png">
+
+## Future Work:
+
+Implement more advanced positioning algorithms, e.g. trilateration, fingerprinting, machine learning based localization, rather than simple thresholding/comparison with calibrated points.
+
+Dynamic calibration / continuous learning to adapt when environment changes.
+
+Use more scanners (or adjust positions) to improve spatial resolution.
+
+Combine with other sensors (WiFi, ultrasonic, camera) to improve accuracy.
+
+Reduce latency, false positives.
+
+Improve power efficiency further; maybe use low-power BLE scanning modes, or better hardware.
 
 References
 ==========
