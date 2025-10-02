@@ -237,6 +237,14 @@ mainly due to the implemented indoor area was being very spatial.
 
 <img align="center" width="45%" height="100%" src="https://github.com/ransaraw98/Indoor-Positioning-BLE/blob/master/Documentation/IMG_20210706_043349.png">
 
+Plotting of the signal strength with RSSI values. Can be used for the induvidual identification of the closest ble server/beacon . Identification of the room/location:
+<img width="1366" height="720" alt="image" src="https://github.com/user-attachments/assets/94e461c0-04f0-4486-b0a7-2e8d7044ab0d" />
+
+Setup for the continuous transfer of sensor values:
+![IMG-20251002-WA0161](https://github.com/user-attachments/assets/fc3aa7a0-4d07-447b-a2c1-ab5d1ab645f2)
+
+
+
 ## Future Work:
 
 Implement more advanced positioning algorithms, e.g. trilateration, fingerprinting, machine learning based localization, rather than simple thresholding/comparison with calibrated points.
