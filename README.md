@@ -1,7 +1,7 @@
 Indoor Positioning with BLE beacons using triangulation
 =======================================================
 
-###### Problem intended to be solved
+## Problem intended to be solved
 
 In presence-based automation systems, there is little intelligence of
 the actual position of the user by the system. The proximity based BLE
@@ -35,9 +35,6 @@ iBeacons in the implemented system.
 <img align="left" width="20%" height="15%" src="https://github.com/ransaraw98/Indoor-Positioning-BLE/blob/master/Documentation/1625681556846.jpg">
 </div>
 
-
-
-
 The UUIDs of the beacons are used to identify a known user. When a known beacon is received by any of the
 beacon scanners, they publish the UUID and the Received Signal Strength
 Indication value along with the scanner ID to a specific topic on MQTT
@@ -57,8 +54,7 @@ room distinctively.
 <br>
 <br>
 <br>
-<br>
-<br>
+</br>
 
 ## System operation
 
@@ -93,7 +89,7 @@ on different topics. A relay module is used to handle high currents.
 <img align="center" width="75%" height="100%" src="https://github.com/ransaraw98/Indoor-Positioning-BLE/blob/master/Documentation/hardware_setup.png">
 
 
-###### ESP32 modules (Kolban, 2018)
+## ESP32 modules (Kolban, 2018)
 
 Three ESP32 modules are used in dual mode. They all support Bluetooth
 4.2 BLE beacon scans. They are connected to a WiFi access point, MQTT
@@ -102,7 +98,7 @@ broker, Node Red are all hosted on a local RaspberryPi server no
 internet connectivity is required. (Spiess, BLE Human Presence Detector
 using an ESP32 (Tutorial, Arduino IDE), 2017)
 
-###### Power consumption considerations
+## Power consumption considerations
 
 Despite the fact that the beacon scanners are unable to operate on
 batteries due to their high-power consumption, efforts were put to
@@ -146,7 +142,7 @@ RTC_DATA_ATTR const char* mqtt_server = "192.168.1.113";
   
 ```
 
-###### Program flow ESP32
+## Program flow ESP32
 
 <img align="left" width="25%" height="15%" src="https://github.com/ransaraw98/Indoor-Positioning-BLE/blob/master/Documentation/ESP_flowChart.png">
 
@@ -193,7 +189,7 @@ data.
   
 ```
 
-###### ESP8266 Node MCU relay modules and light
+## ESP8266 Node MCU relay modules and light
 
 Two Node MCU modules are used in the implementation. They both subscribe
 to two different topics on the MQTT broker. If the command to turn on
@@ -203,7 +199,7 @@ GPIO 5 pin.
 Furthermore, to override the system's operation, user can connect to the
 NodeMCU's hosted web server using its IP address and use the links.
 
-###### Node Red Flow
+## Node Red Flow
 
 The MQTT messages are first categorized based on the User device and
 scanner IDs, creating global variables containing each user device's
@@ -259,7 +255,7 @@ Reduce latency, false positives.
 
 Improve power efficiency further; maybe use low-power BLE scanning modes, or better hardware.
 
-References
+## References
 ==========
 
 Cope, S. (2018, May 21). *Read and Write Data To a File In Node-Red*.
