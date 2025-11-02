@@ -239,6 +239,7 @@ Plotting of the signal strength with RSSI values. Can be used for the induvidual
 Setup for the continuous transfer of sensor values:
 ![IMG-20251002-WA0161](https://github.com/user-attachments/assets/fc3aa7a0-4d07-447b-a2c1-ab5d1ab645f2)
 
+<img width="505" height="277" alt="image" src="https://github.com/user-attachments/assets/2f83c61b-9e08-4c60-ae9b-2d992a101498" />
 
 
 ## Future Work:
